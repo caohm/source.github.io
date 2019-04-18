@@ -1,0 +1,38 @@
+{
+  "name": "open-gateway",
+  "version": "1.0.0-alpha",
+  "description": "open api gateway for backend services",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "mock": "node test/mock.js",
+    "queue": "node test/receive.js"
+  },
+  "author": "Xiaoyu.DAI (daixy@neusoft.com)",
+  "license": "ISC",
+  "dependencies": {
+    "amqplib": "^0.4.2",
+    "body-parser": "^1.18.1",
+    "cache-service": "^1.3.8",
+    "cache-service-node-cache": "^1.1.1",
+    "cache-service-redis": "^1.2.3",
+    "cookie-parser": "^1.4.3",
+    "express": "^4.15.4",
+    "express-validator": "^2.21.0",
+    "finalhandler": "^0.5.1",
+    "http-auth": "^2.4.11",
+    "ipaddr.js": "^1.5.2",
+    "morgan": "^1.8.2",
+    "node-fetch": "^1.7.3",
+    "redis": "^2.8.0",
+    "serve-favicon": "^2.4.4",
+    "uuid": "^2.0.3",
+    "skyapm-nodejs": "^1.1.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "http://192.168.131.211:7777/ngopen/ngopen-opgw.git"
+  },
+  "devDependencies": {}
+}
+

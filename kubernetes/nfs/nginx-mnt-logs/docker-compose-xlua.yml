@@ -1,0 +1,19 @@
+version: '3'
+
+services:
+
+  nginx-nfs-11: &instance
+    image: 172.20.27.7:5000/default/xlua:b
+    command: "nginx -g 'daemon off;'"
+    volumes:
+      - ./mnt/logs:/opt/nginx/logs:rw
+      - ./mnt/conf:/opt/nginx/conf:ro
+
+  nginx-nfs-12:
+    <<: *instance
+
+  nginx-nfs-13:
+    <<: *instance
+
+  nginx-nfs-14:
+    <<: *instance

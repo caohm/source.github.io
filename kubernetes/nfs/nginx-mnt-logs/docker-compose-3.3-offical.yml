@@ -1,0 +1,29 @@
+version: '3.3'
+
+services:
+  nginx-nfs-31: &instance
+    image: nginx:1.14
+    command: "nginx -g 'daemon off;'"
+    volumes:
+      - ./mnt/conf:/etc/nginx:ro
+      - type: volume
+        source: nginx-nfs
+        target: /var/log/nginx
+        volume:
+          nocopy: true
+
+  nginx-nfs-32:
+    <<: *instance
+
+  nginx-nfs-33:
+    <<: *instance
+
+
+
+volumes:
+  nginx-nfs:
+    driver: local
+    driver_opts:
+      type: "nfs"
+      o: "addr=127.0.0.1,vers=4,soft,timeo=180,bg,tcp,rw"
+      device: "127.0.0.1:/export/nfs/logs"

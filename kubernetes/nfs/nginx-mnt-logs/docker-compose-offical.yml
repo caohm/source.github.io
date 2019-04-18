@@ -1,0 +1,15 @@
+version: '3'
+
+services:
+  nginx-nfs-1: &instance
+    image: nginx:1.14
+    command: "nginx -g 'daemon off;'"
+    volumes:
+      - ./mnt/logs:/var/log/nginx:rw
+      - ./mnt/conf:/etc/nginx:ro
+
+  nginx-nfs-2:
+    <<: *instance
+
+  nginx-nfs-3:
+    <<: *instance

@@ -1,0 +1,57 @@
+
+version: '3.3'
+services:
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:6.3.2
+    container_name: elasticsearch
+    restart: always
+    ports:
+      - 9200:9200
+      - 9300:9300
+    environment:
+      discovery.type: single-node
+      xpack.security.enabled: false
+      cluster.name: CollectorDBCluster
+      network.host: 0.0.0.0
+      bootstrap.memory_lock: true
+    volumes:
+      - ./config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml:ro
+      - /etc/localtime:/etc/localtime:ro
+      - /etc/timezone:/etc/timezone:ro
+  oap:
+    image: apache/skywalking-oap-server:6.0.0-GA-timezone
+    container_name: oap
+    restart: always
+    depends_on:
+      - elasticsearch
+    links:
+      - elasticsearch
+    ports:
+      - 11800:11800
+      - 12800:12800
+    environment:
+      JAVA_OPTS: " -Xms512M -Xmx1024M"
+      ES_CLUSTER_NAME: CollectorDBCluster
+      ES_ADDRESSES: elasticsearch:9300
+      SW_STORAGE_ES_CLUSTER_NODES: elasticsearch:9200
+    volumes:
+      - ./config:/skywalking/config:ro
+      - /etc/localtime:/etc/localtime:ro
+      - /etc/timezone:/etc/timezone:ro
+  ui:
+    image: apache/skywalking-ui:6.0.0-GA-timezone
+    container_name: ui
+    restart: always
+    depends_on:
+      - oap
+    links:
+      - oap
+    ports:
+      - 18080:8080
+    environment:
+      JAVA_OPTS: " -Xms512M -Xmx1024M"
+      collector.ribbon.listOfServers: oap:12800
+      collector.ribbon.ReadTimeout: 20000
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - /etc/timezone:/etc/timezone:ro
