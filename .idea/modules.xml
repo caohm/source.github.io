@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/source.github.io.iml" filepath="$PROJECT_DIR$/.idea/source.github.io.iml" />
+      <module fileurl="file://$PROJECT_DIR$/服务发现/consul/spring-cloud-consul/spring-cloud-consul-client.iml" filepath="$PROJECT_DIR$/服务发现/consul/spring-cloud-consul/spring-cloud-consul-client.iml" />
+    </modules>
+  </component>
+</project>
